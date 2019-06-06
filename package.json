@@ -4,12 +4,25 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@material-ui/core": "^4.0.2",
     "parcel": "^1.12.3",
-    "react": "^16.8.6"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@types/node": "^12.0.6",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "typescript": "^3.5.1",
+    "workbox": "0.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel serve src/index.html --open",
+    "build": "parcel build src/index.html",
+    "workbox": "workbox generateSW workbox-config.js",
+    "prebuild": "rm -rf dist",
+    "postbuild": "npm run workbox"
   },
   "repository": {
     "type": "git",
