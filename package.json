@@ -1,0 +1,24 @@
+{
+  "name": "cash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "parcel": "^1.12.3",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eletrodos/cash.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eletrodos/cash/issues"
+  },
+  "homepage": "https://github.com/Eletrodos/cash#readme"
+}
