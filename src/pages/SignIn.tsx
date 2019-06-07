@@ -1,18 +1,105 @@
-import React from "react";
+import * as React from "react";
+import { Grid, Avatar, Paper, Link, Box, Zoom, Slide } from "@material-ui/core";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
-import * as fb from "../services/fb";
+import { fbUiConfig } from "../services/constants";
 
-export default class SignIn extends React.Component {
-  private elemRef = React.createRef();
+import backgroundImage from "../images/background.jpeg";
 
-  public componentDidMount() {
-    if (this.elemRef) {
-      fb.initialize();
-      fb.createLoginOptions("#fb");
-    }
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    height: "100vh"
+  },
+  image: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "100%",
+    height: "100%"
+  },
+  paper: {
+    margin: theme.spacing(20, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: "#2ecc71"
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
   }
+}));
 
-  public render() {
-    return <div id="fb" />;
-  }
-}
+const SignIn = () => {
+  const classes = useStyles();
+
+  return (
+    <Grid container component="main" className={classes.root}>
+      <Grid item xs={false} sm={false} md={7}>
+        <Slide timeout={500} direction="right" in mountOnEnter unmountOnExit>
+          <div className={classes.image} />
+        </Slide>
+      </Grid>
+      <Grid item xs={12} sm={12} md={5} component={Paper}>
+        <div className={classes.paper}>
+          <Zoom in mountOnEnter unmountOnExit>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+          </Zoom>
+          <Zoom
+            in
+            mountOnEnter
+            unmountOnExit
+            style={{ transitionDelay: "200ms" }}
+          >
+            <Typography component="h1" variant="h5">
+              Entre
+            </Typography>
+          </Zoom>
+          <Zoom
+            in
+            mountOnEnter
+            unmountOnExit
+            style={{ transitionDelay: "400ms" }}
+          >
+            <div>
+              <StyledFirebaseAuth
+                uiConfig={fbUiConfig}
+                firebaseAuth={firebase.auth()}
+              />
+            </div>
+          </Zoom>
+          <Zoom
+            in
+            mountOnEnter
+            unmountOnExit
+            style={{ transitionDelay: "600ms" }}
+          >
+            <Box mt={5}>
+              <Typography variant="body2" color="textSecondary" align="center">
+                {"Feito com amor por "}
+                <Link color="inherit" href="https://github.com/Eletrodos">
+                  Eletrodos
+                </Link>
+              </Typography>
+            </Box>
+          </Zoom>
+        </div>
+      </Grid>
+    </Grid>
+  );
+};
+export default SignIn;
