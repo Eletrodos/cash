@@ -18,5 +18,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const root = document.getElementById("root");
-
 ReactDOM.render(<App />, root);

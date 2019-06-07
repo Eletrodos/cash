@@ -5,6 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "@material-ui/core": "^4.0.2",
+    "@material-ui/icons": "^4.0.1",
+    "firebase": "^6.1.1",
+    "firebaseui": "^4.0.0",
     "parcel": "^1.12.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
@@ -15,14 +18,15 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "typescript": "^3.5.1",
-    "workbox": "0.0.0"
+    "workbox-cli": "^4.3.1"
   },
   "scripts": {
     "start": "parcel serve src/index.html --open",
     "build": "parcel build src/index.html",
     "workbox": "workbox generateSW workbox-config.js",
     "prebuild": "rm -rf dist",
-    "postbuild": "npm run workbox"
+    "postbuild": "npm run workbox",
+    "deploy": "npm run build && firebase deploy"
   },
   "repository": {
     "type": "git",
