@@ -10,8 +10,10 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import HistoryIcon from "@material-ui/icons/History";
+import GroupIcon from "@material-ui/icons/Group";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const drawerWidth = 240;
 
@@ -45,6 +47,36 @@ export interface LayoutDrawerProps {
   children: React.ReactNode;
 }
 
+const Menu = () => (
+  <List>
+    <ListItem button>
+      <ListItemIcon>
+        <CardTravelIcon />
+      </ListItemIcon>
+      <ListItemText primary="Transação" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <HistoryIcon />
+      </ListItemIcon>
+      <ListItemText primary="Histórico" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <GroupIcon />
+      </ListItemIcon>
+      <ListItemText primary="Grupos" />
+    </ListItem>
+    <ListItem button>
+      <ListItemIcon>
+        <ExitToAppIcon />
+      </ListItemIcon>
+      <ListItemText primary="Desconectar" />
+    </ListItem>
+  </List>
+);
+
+/** Desenha o layout principal compartilhado entre todas as páginas */
 const LayoutDrawer = (props: LayoutDrawerProps) => {
   const classes = useStyles();
 
@@ -68,27 +100,8 @@ const LayoutDrawer = (props: LayoutDrawerProps) => {
       >
         <div className={classes.toolbar} />
         <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        {/** Menu principal */}
+        <Menu />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

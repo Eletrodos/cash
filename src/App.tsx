@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { CssBaseline } from "@material-ui/core";
 
-import SignIn from "./pages/SignIn";
-import Home from "./pages/Home";
+import AppRouter from "./components/Router";
 
 /** Aplicação principal */
 export default class App extends Component {
@@ -10,7 +9,7 @@ export default class App extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Home />
+        <AppRouter />
       </React.Fragment>
     );
   }
