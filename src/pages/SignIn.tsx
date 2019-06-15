@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Grid, Avatar, Paper, Link, Box, Zoom, Slide } from "@material-ui/core";
-import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
@@ -8,6 +7,7 @@ import { makeStyles } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 
 import { fbUiConfig } from "../services/constants";
+import { fbAuth } from "../services/fb";
 
 import backgroundImage from "../images/background.jpeg";
 
@@ -76,10 +76,7 @@ const SignIn = () => {
             style={{ transitionDelay: "400ms" }}
           >
             <div>
-              <StyledFirebaseAuth
-                uiConfig={fbUiConfig}
-                firebaseAuth={firebase.auth()}
-              />
+              <StyledFirebaseAuth uiConfig={fbUiConfig} firebaseAuth={auth} />
             </div>
           </Zoom>
           <Zoom
