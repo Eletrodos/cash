@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import LayoutDrawer from "../components/LayoutDrawer";
 import {
   List,
   ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
   Divider,
   Fab,
   makeStyles,
@@ -19,7 +15,10 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import { firestore } from "../services/fb";
+import LayoutDrawer from "../../components/LayoutDrawer";
+import GroupCard from "./GroupCard";
+import { firestore } from "../../services/fb";
+import { IGroupData } from "../../services/types";
 
 const useStyles = makeStyles(theme => ({
   fab: {
@@ -56,13 +55,13 @@ const Groups: React.FC = () => {
   const [name, setName] = useState("");
   const [minCoins, setMinCoins] = useState("0");
   const [maxCoins, setMaxCoins] = useState("300");
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<IGroupData[]>([]);
 
   firestore
     .collection("groups")
     .get()
     .then(function(querySnapshot) {
-      const groupsFiltered = [];
+      const groupsFiltered: IGroupData[] = [];
       querySnapshot.forEach(doc => {
         groupsFiltered.push({
           name: doc.data().name
@@ -105,13 +104,11 @@ const Groups: React.FC = () => {
   return (
     <LayoutDrawer>
       <List>
-        {groups.map(group => {
+        {groups.map((group, index) => {
+          const { name } = group;
           return (
-            <ListItem>
-              <ListItemAvatar>
-                <Avatar>{group.name.substring(0, 1)}</Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={group.name} />
+            <ListItem key={index}>
+              <GroupCard name={name} members={8} userCoins={100} />
             </ListItem>
           );
         })}

@@ -7,7 +7,8 @@ import AppRouter from "./components/Router";
 import { Provider, IAuthState } from "./services/hooks/auth";
 
 const defaultAuthState: IAuthState = {
-  isLogged: false
+  isLogged: false,
+  isLoading: true
 };
 
 /** Aplicação principal */
@@ -17,9 +18,9 @@ const App: React.FC = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user: User | null) => {
       if (user) {
-        setAuthState({ isLogged: true });
+        setAuthState({ isLogged: true, isLoading: false });
       } else {
-        setAuthState({ isLogged: false });
+        setAuthState({ isLogged: false, isLoading: false });
       }
     });
   }, []);

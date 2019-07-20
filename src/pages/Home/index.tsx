@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LayoutDrawer from "../components/LayoutDrawer";
+import LayoutDrawer from "../../components/LayoutDrawer";
 import {
   List,
   ListItem,
@@ -11,7 +11,7 @@ import {
 import { withRouter } from "react-router";
 import { History } from "history";
 
-import AuthContext from "../services/hooks/auth";
+import AuthContext from "../../services/hooks/auth";
 
 interface IHomeProps {
   history: History;
@@ -21,7 +21,7 @@ interface IHomeProps {
 const Home: React.FC<IHomeProps> = ({ history }) => {
   const authData = useContext(AuthContext);
 
-  if (!authData.isLogged) {
+  if (!authData.isLoading && !authData.isLogged) {
     history.push("/signIn");
   }
 
