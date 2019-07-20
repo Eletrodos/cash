@@ -6,4 +6,4 @@ export const fbApp = firebase.initializeApp(fbConfig);
 
 export const firestore = fbApp.firestore();
 
-export const fbAuth = fbApp.auth();
+export const auth = fbApp.auth();

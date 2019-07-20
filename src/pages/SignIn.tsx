@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, Avatar, Paper, Link, Box, Zoom, Slide } from "@material-ui/core";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core";
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import firebase from "firebase";
 
-import { fbUiConfig } from "../services/constants";
-import { fbAuth } from "../services/fb";
+import { auth } from "../services/fb";
+import AuthContext from "../services/hooks/auth";
 
 import backgroundImage from "../images/background.jpeg";
 
@@ -42,9 +43,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-/** Página de entrada */
+/**
+ * Página padrão de autenticação,
+ * será redirecionado para cá sempre que não estiver logado
+ **/
 const SignIn: React.FC = () => {
   const classes = useStyles();
+  const authState = useContext(AuthContext);
+  console.log("Sign in o", authState);
+
+  const fbUiConfig: firebaseui.auth.Config = {
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ]
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
