@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Grid, Avatar, Paper, Link, Box, Zoom, Slide } from "@material-ui/core";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const SignIn = () => {
+/** Página de entrada */
+const SignIn: React.FC = () => {
   const classes = useStyles();
 
   return (

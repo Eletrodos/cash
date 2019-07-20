@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LayoutDrawer from "../components/LayoutDrawer";
 import {
   List,
@@ -18,7 +18,6 @@ import {
   Button
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { useState } from "react";
 
 import { firestore } from "../services/fb";
 
@@ -51,7 +50,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Groups = () => {
+/** Página de visualização de grupos */
+const Groups: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [minCoins, setMinCoins] = useState("0");

@@ -77,7 +77,7 @@ const Menu = () => (
 );
 
 /** Desenha o layout principal compartilhado entre todas as páginas */
-const LayoutDrawer = (props: LayoutDrawerProps) => {
+const LayoutDrawer: React.FC<LayoutDrawerProps> = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -105,7 +105,7 @@ const LayoutDrawer = (props: LayoutDrawerProps) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        {children}
       </main>
     </div>
   );

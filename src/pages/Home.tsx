@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import LayoutDrawer from "../components/LayoutDrawer";
 import {
   List,
@@ -9,7 +9,8 @@ import {
   Divider
 } from "@material-ui/core";
 
-const Home = () => {
+/** Página inicial */
+const Home: React.FC = () => {
   return (
     <LayoutDrawer>
       <List>

@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { CssBaseline } from "@material-ui/core";
 
 import AppRouter from "./components/Router";
 
 /** Aplicação principal */
-export default class App extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <AppRouter />
-      </React.Fragment>
-    );
-  }
-}
+const App: React.FC = () => {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <AppRouter />
+    </React.Fragment>
+  );
+};
+
+export default App;
