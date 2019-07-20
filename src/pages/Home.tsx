@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LayoutDrawer from "../components/LayoutDrawer";
 import {
   List,
@@ -8,9 +8,23 @@ import {
   ListItemText,
   Divider
 } from "@material-ui/core";
+import { withRouter } from "react-router";
+import { History } from "history";
+
+import AuthContext from "../services/hooks/auth";
+
+interface IHomeProps {
+  history: History;
+}
 
 /** Página inicial */
-const Home: React.FC = () => {
+const Home: React.FC<IHomeProps> = ({ history }) => {
+  const authData = useContext(AuthContext);
+
+  if (!authData.isLogged) {
+    history.push("/signIn");
+  }
+
   return (
     <LayoutDrawer>
       <List>
@@ -38,4 +52,4 @@ const Home: React.FC = () => {
     </LayoutDrawer>
   );
 };
-export default Home;
+export default withRouter(Home);

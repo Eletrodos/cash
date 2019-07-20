@@ -49,8 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
  **/
 const SignIn: React.FC = () => {
   const classes = useStyles();
-  const authState = useContext(AuthContext);
-  console.log("Sign in o", authState);
+  const authData = useContext(AuthContext);
 
   const fbUiConfig: firebaseui.auth.Config = {
     signInOptions: [
