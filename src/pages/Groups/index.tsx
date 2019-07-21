@@ -5,16 +5,14 @@ import {
   Fab,
   makeStyles,
   Snackbar,
-  IconButton,
-  SnackbarContent
+  IconButton
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
 import LayoutDrawer from "../../components/LayoutDrawer";
 import GroupCard from "./GroupCard";
-import { firestore } from "../../services/fb";
-import { saveGroup } from "../../services/fbGroups";
+import { saveGroup, getGroups } from "../../services/fbGroups";
 import { IGroupData } from "../../services/types";
 import GroupCreator from "./GroupCreator";
 
@@ -51,8 +49,8 @@ const Groups: React.FC = () => {
     setIsCreating(false);
     try {
       await saveGroup(data);
-    } catch (error) {
-      setError(error);
+    } catch (groupsError) {
+      setError(groupsError);
     }
   };
 
@@ -66,21 +64,18 @@ const Groups: React.FC = () => {
     setIsCreating(value);
   };
 
+  /** Carrega a lista de grupos ou exibe a mensagem de erro */
+  const loadGroups = async () => {
+    try {
+      const groups = await getGroups();
+      setGroups(groups);
+    } catch (groupsError) {
+      setError(groupsError);
+    }
+  };
+
   useEffect(() => {
-    return () => {
-      firestore
-        .collection("groups")
-        .get()
-        .then(function(querySnapshot) {
-          const groupsFiltered: IGroupData[] = [];
-          querySnapshot.forEach(doc => {
-            groupsFiltered.push({
-              name: doc.data().name
-            });
-          });
-          setGroups(groupsFiltered);
-        });
-    };
+    loadGroups();
   }, []);
 
   return (
