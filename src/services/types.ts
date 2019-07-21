@@ -1,5 +1,10 @@
+export interface IGroupDataRules {
+  /** Usuários podem fazer transferencia entre si */
+  userTransfer: boolean;
+}
+
 export interface IGroupData {
-  maxCoins: number;
-  minCoins: number;
+  volume: number;
   name: string;
+  rules: IGroupDataRules;
 }
