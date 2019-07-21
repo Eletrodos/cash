@@ -2,22 +2,19 @@ import React, { useState, useEffect } from "react";
 import {
   List,
   ListItem,
-  Divider,
   Fab,
   makeStyles,
-  Modal,
-  Typography,
-  Input,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Button
+  Snackbar,
+  IconButton,
+  SnackbarContent
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 
 import LayoutDrawer from "../../components/LayoutDrawer";
 import GroupCard from "./GroupCard";
 import { firestore } from "../../services/fb";
+import { saveGroup } from "../../services/fbGroups";
 import { IGroupData } from "../../services/types";
 import GroupCreator from "./GroupCreator";
 
@@ -36,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   },
   right: {
     float: "right"
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark
   }
 }));
 
@@ -43,12 +43,22 @@ const useStyles = makeStyles(theme => ({
 const Groups: React.FC = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [groups, setGroups] = useState<IGroupData[]>([]);
+  const [error, setError] = useState("");
   const classes = useStyles();
 
   /** Comportamento para criar um novo grupo. Já recebe os dados validados */
   const handleCreateGroup = async (data: IGroupData) => {
-    await firestore.collection("groups").add(data);
     setIsCreating(false);
+    try {
+      await saveGroup(data);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  /** Comportamento para modal de erro fechado */
+  const handleErrorClose = () => {
+    setError("");
   };
 
   /** Comportamento para fechar/exibir o criador de grupos */
@@ -98,6 +108,22 @@ const Groups: React.FC = () => {
         open={isCreating}
         onCreate={handleCreateGroup}
         onClose={handleGroupCreatorToggle(false)}
+      />
+      <Snackbar
+        open={error !== ""}
+        onClose={handleErrorClose}
+        message={error}
+        autoHideDuration={6000}
+        action={[
+          <IconButton
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            onClick={handleErrorClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        ]}
       />
     </LayoutDrawer>
   );

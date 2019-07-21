@@ -73,8 +73,6 @@ const GroupCreator: React.FC<IGroupCreatorProps> = ({
 
   /** Comportamento para chamar o callback de criação de grupo */
   const handleCreateGroupCallback = () => {
-    console.log("dados obtidos", data);
-
     const currentError: IFormErrors = {
       name: data.name === "",
       volume: data.volume < 100 || data.volume > 10000
