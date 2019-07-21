@@ -14,6 +14,8 @@ import HistoryIcon from "@material-ui/icons/History";
 import GroupIcon from "@material-ui/icons/Group";
 import CardTravelIcon from "@material-ui/icons/CardTravel";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
 
 const drawerWidth = 240;
 
@@ -23,8 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex"
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
       background: "#16a085"
     },
     drawer: {
@@ -78,13 +78,22 @@ const Menu = () => (
 
 /** Desenha o layout principal compartilhado entre todas as páginas */
 const LayoutDrawer: React.FC<LayoutDrawerProps> = ({ children }) => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
   const classes = useStyles();
+
+  /** Exibe ou oculta o menu */
+  const handleToggleMenuOpen = () => {
+    setMenuOpen((lastState: boolean) => !lastState);
+  };
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
+          <IconButton onClick={handleToggleMenuOpen}>
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" noWrap>
             Cash
           </Typography>
@@ -92,11 +101,12 @@ const LayoutDrawer: React.FC<LayoutDrawerProps> = ({ children }) => {
       </AppBar>
       <Drawer
         className={classes.drawer}
-        variant="permanent"
+        open={menuOpen}
+        anchor="left"
+        onClose={handleToggleMenuOpen}
         classes={{
           paper: classes.drawerPaper
         }}
-        anchor="left"
       >
         <div className={classes.toolbar} />
         <Divider />
