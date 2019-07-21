@@ -15,7 +15,8 @@ import {
 
 const useStyles = makeStyles(() => ({
   card: {
-    width: "100%"
+    width: "100%",
+    cursor: "pointer"
   },
   chip: {
     marginTop: 10,

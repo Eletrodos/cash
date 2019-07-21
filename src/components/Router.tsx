@@ -5,6 +5,7 @@ import { createBrowserHistory } from "history";
 import SignIn from "../pages/SignIn";
 import Groups from "../pages/Groups";
 import Home from "../pages/Home";
+import Group from "../pages/Group";
 
 const history = createBrowserHistory();
 
@@ -13,7 +14,8 @@ const AppRouter: React.FC = () => {
     <Router history={history}>
       <Route path="/" exact component={Home} />
       <Route path="/groups" exact component={Groups} />
-      <Route path="/signIn/" component={SignIn} />
+      <Route path="/group/:id" exact component={Group} />
+      <Route path="/signIn/" exact component={SignIn} />
     </Router>
   );
 };

@@ -5,7 +5,8 @@ import {
   Fab,
   makeStyles,
   Snackbar,
-  IconButton
+  IconButton,
+  CircularProgress
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
@@ -18,7 +19,7 @@ import GroupCreator from "./GroupCreator";
 
 const useStyles = makeStyles(theme => ({
   fab: {
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing(2),
     right: theme.spacing(2)
   },
@@ -34,12 +35,18 @@ const useStyles = makeStyles(theme => ({
   },
   error: {
     backgroundColor: theme.palette.error.dark
+  },
+  loading: {
+    margin: "50% 50%",
+    transform: "translate(-50%,-50%)",
+    textAlign: "center"
   }
 }));
 
 /** Página de visualização de grupos */
 const Groups: React.FC = () => {
   const [isCreating, setIsCreating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [groups, setGroups] = useState<IGroupData[]>([]);
   const [error, setError] = useState("");
   const classes = useStyles();
@@ -47,11 +54,13 @@ const Groups: React.FC = () => {
   /** Comportamento para criar um novo grupo. Já recebe os dados validados */
   const handleCreateGroup = async (data: IGroupData) => {
     setIsCreating(false);
+    setIsLoading(true);
     try {
       await saveGroup(data);
     } catch (groupsError) {
       setError(groupsError);
     }
+    setIsLoading(false);
   };
 
   /** Comportamento para modal de erro fechado */
@@ -66,12 +75,14 @@ const Groups: React.FC = () => {
 
   /** Carrega a lista de grupos ou exibe a mensagem de erro */
   const loadGroups = async () => {
+    setIsLoading(true);
     try {
       const groups = await getGroups();
       setGroups(groups);
     } catch (groupsError) {
       setError(groupsError);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -80,17 +91,28 @@ const Groups: React.FC = () => {
 
   return (
     <LayoutDrawer>
-      <List>
-        {groups.map((group, index) => {
-          const { name } = group;
-          return (
-            <ListItem key={index}>
-              <GroupCard name={name} members={8} userCoins={100} />
-            </ListItem>
-          );
-        })}
-      </List>
+      {/** Indicador de carregamento */}
+      {isLoading && (
+        <div className={classes.loading}>
+          <CircularProgress />
+        </div>
+      )}
 
+      {/** Visualização dos grupos */}
+      {!isLoading && (
+        <List>
+          {groups.map((group, index) => {
+            const { name } = group;
+            return (
+              <ListItem key={index}>
+                <GroupCard name={name} members={8} userCoins={100} />
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
+
+      {/** Botão para criar um novo grupo */}
       <Fab
         className={classes.fab}
         color="primary"
@@ -99,11 +121,14 @@ const Groups: React.FC = () => {
         <AddIcon />
       </Fab>
 
+      {/** Componente para criar um novo grupo */}
       <GroupCreator
         open={isCreating}
         onCreate={handleCreateGroup}
         onClose={handleGroupCreatorToggle(false)}
       />
+
+      {/** Mensagens de erro */}
       <Snackbar
         open={error !== ""}
         onClose={handleErrorClose}

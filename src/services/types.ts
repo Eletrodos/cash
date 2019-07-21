@@ -7,4 +7,5 @@ export interface IGroupData {
   volume: number;
   name: string;
   rules: IGroupDataRules;
+  owner: string;
 }

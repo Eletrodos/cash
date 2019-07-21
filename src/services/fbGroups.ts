@@ -20,11 +20,12 @@ export const getGroups = async () => {
     const groups: IGroupData[] = [];
     // Mapeia os grupos no tipe IGroupData[]
     querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-      const { name, volume, rules } = doc.data();
+      const { name, volume, rules, owner } = doc.data();
       groups.push({
         name,
         volume,
-        rules
+        rules,
+        owner
       });
     });
     return groups;
