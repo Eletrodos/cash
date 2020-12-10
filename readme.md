@@ -11,7 +11,7 @@ O projeto está em fase de planejamento, você pode contribuir abrindo com discu
 
 ## Trabalho em progresso
 
-- [ ] Planejamento do ecossistema.
+- [ ] https://github.com/Eletrodos/cash/issues/10
 
 ## Tecnologias utilizadas
 
