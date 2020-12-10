@@ -11,7 +11,7 @@ O projeto está em fase de planejamento, você pode contribuir abrindo com discu
 
 ## Trabalho em progresso
 
-- [ ] https://github.com/Eletrodos/cash/issues/10
+- [ ] [Funcionamento da moeda](https://github.com/Eletrodos/cash/issues/10)
 
 ## Tecnologias utilizadas
 
