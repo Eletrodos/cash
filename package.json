@@ -4,23 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "@material-ui/core": "^4.2.1",
-    "firebase": "^6.1.1",
-    "firebaseui": "^4.0.0",
-    "parcel": "^1.12.3",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-firebaseui": "^3.1.2"
-  },
-  "devDependencies": {
-    "@material-ui/icons": "^4.2.1",
-    "@types/node": "^12.0.6",
-    "@types/react": "^16.8.19",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-router": "^5.0.3",
-    "react-router": "^5.0.1",
-    "typescript": "^3.5.1",
-    "workbox-cli": "^4.3.1"
+    "firebase": "^9.22.1",
+    "parcel": "^2.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "start": "parcel serve src/index.html --open",
@@ -39,5 +27,12 @@
   "bugs": {
     "url": "https://github.com/Eletrodos/cash/issues"
   },
-  "homepage": "https://github.com/Eletrodos/cash#readme"
+  "homepage": "https://github.com/Eletrodos/cash#readme",
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.8.3",
+    "@parcel/transformer-webmanifest": "^2.8.3",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "process": "^0.11.10"
+  }
 }
