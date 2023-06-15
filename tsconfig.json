@@ -4,13 +4,16 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "react",
-    "lib": ["es2018", "dom"],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "module": "commonjs",
     "noEmitOnError": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "strict": true,
-    "target": "es5"
+    "target": "ES2015"
   }
 }

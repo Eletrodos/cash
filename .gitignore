@@ -3,3 +3,4 @@ node_modules/
 dist/
 .firebase/
 firebase-config.json
+.parcel-cache
